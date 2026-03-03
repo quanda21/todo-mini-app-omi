@@ -8,23 +8,35 @@ export const sharedStyle = `
   margin: 0;
 }
 
-/* Color */
+/* Color Variables */
+:root,
+html,
 :host {
-  --primary: var(--my-app-primary-color, #1666c8);
+  --primary: var(--my-app-primary-color, #01684b);
   --ai-tag-bg: #ffffff;
   --member-bg: #e6f0fa;
   --customer-bg: #f5f7fa;
   --vb-bg: #ffffff;
+  --vb-secondary-bg: #f8fbff;
   --vb-text: #000000;
+  --vb-button: #01684b;
+  --vb-accent: #01684b;
+  --vb-section-separator: #e5e7eb;
 }
 
+:root.dark,
+html.dark,
 :host(.dark) {
-  --primary: #3e87e0;
+  --primary: #01684b;
   --ai-tag-bg: #141414;
   --member-bg: #153b75;
   --customer-bg: #2a3846;
   --vb-bg: #141414;
+  --vb-secondary-bg: #1f1f1f;
   --vb-text: #ffffff;
+   --vb-button: #01684b;
+  --vb-accent: #01684b;
+  --vb-section-separator: #333333;
 }
 
 /* Scrollbar */

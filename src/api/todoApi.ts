@@ -87,8 +87,8 @@ export async function getTodoModuleTokenAPI(params: {
             params: {
                 projectCode: params.projectCode,
                 uid: params.uid,
-                type: params.type || 'CDR-WC',
-                source: params.source || 'Desktop-RTC',
+                type: 'TODO',
+                source: 'Desktop-RTC',
             },
         })
         return res.data

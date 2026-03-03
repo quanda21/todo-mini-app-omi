@@ -6,6 +6,8 @@ import {
     markTodoAsComplete,
     isAuthedSignal
 } from '../api/todoApi'
+import { sharedStyle } from '../style/sharedStyle'
+import { useTheme } from '../utils/themeSignal'
 import type { TodoItem } from '../api/mockData'
 import './TodoCard'
 
@@ -19,7 +21,7 @@ const errorMessage = signal('')
 
 @tag('todo-list')
 export default class extends Component<Props> {
-    static css = [tailwind]
+    static css = [tailwind, sharedStyle]
 
     static props = {
         isAuthed: {
@@ -28,8 +30,15 @@ export default class extends Component<Props> {
         }
     }
 
+    private disposeTheme?: () => void
+
     install() {
         this.refreshTodos()
+        this.disposeTheme = useTheme(this)
+    }
+
+    uninstall() {
+        this.disposeTheme?.()
     }
 
     private _isAuthed = false

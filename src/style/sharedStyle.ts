@@ -32,11 +32,11 @@ html.dark,
   --member-bg: #153b75;
   --customer-bg: #2a3846;
   --vb-bg: #141414;
-  --vb-secondary-bg: #1f1f1f;
+  --vb-secondary-bg: #141414;
   --vb-text: #ffffff;
    --vb-button: #01684b;
   --vb-accent: #01684b;
-  --vb-section-separator: #333333;
+  --vb-section-separator: #414243;
 }
 
 /* Scrollbar */

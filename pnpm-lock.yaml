@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@vbotma/sdk':
-        specifier: ^3.3.2
-        version: 3.3.2(typescript@5.9.2)
+        specifier: ^5.0.1
+        version: 5.0.1(typescript@5.9.2)
       axios:
         specifier: ^1.13.6
         version: 1.13.6
@@ -537,23 +537,23 @@ packages:
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
 
-  '@vbotma/bridge@2.2.9':
-    resolution: {integrity: sha512-V2vzf62fqS1ZUgJdHL/yrFLk7jiB5UgC6CbRwlz9MKOHRRI2486AzV+x8U8rsNR7PYhGIKuJNy++oo599Pa/Fw==}
+  '@vbotma/bridge@4.0.0':
+    resolution: {integrity: sha512-fj+o0ba9b5Qm4nUZzROErxp8ibuRxRWyrVQUgyQL92poD8o3SnpYxtuwmlrpTpfFGRrq1AS+BIrz037JFj1G3A==}
 
-  '@vbotma/sdk@3.3.2':
-    resolution: {integrity: sha512-zFh56UPGEkIHNSJXtwqKYvl6CJbtd8+4c67inYWj99W0YSLCJon5AciHo6TyrqSF1wQsmb4mXeHknugk53dFeg==}
+  '@vbotma/sdk@5.0.1':
+    resolution: {integrity: sha512-NELutKgJVwD5HFyENoE/r+p1SJfgUJhGhWJd8/rlN5pVBkNTD8W90K5pVPcW+UVuKN/L/Qk4hEI3Vzuc69kSGA==}
 
-  '@vbotma/signals@1.0.2':
-    resolution: {integrity: sha512-HF8SaxfkIV+eTbb0KYtJMNnCgZgrUUJ9fbiceqlVZmx+BD9DEvd57fWrPcSNcpG+B2t2f4/VmMudivCLki30vw==}
+  '@vbotma/signals@2.0.0':
+    resolution: {integrity: sha512-ow1F/UAsBHAM4c1zaaiSDxtlHR9D6THwFOoS6s71ZEiysRju6kiQAPuamniQJgXd4+YBi9rsH6MRB+um+ZTdQA==}
 
-  '@vbotma/toolkit@1.0.5':
-    resolution: {integrity: sha512-i5BS7OVc6rRPLKl40WUJT8s4XyJfN5T3v8dFlrA2vpzlUjdRmBiXNqk+vyD8v5DAOHxDDhhjpHOY2z2lPdcoaQ==}
+  '@vbotma/toolkit@2.0.0':
+    resolution: {integrity: sha512-UiZBWmIsIbP23bfzVNEeAQF01DTAB6L1NTu1ulBZT4FjWd5VAdJWDCKl2xO6F9s/dt/ombt4IhJV23U3qVoKOw==}
 
-  '@vbotma/transformers@1.1.4':
-    resolution: {integrity: sha512-XgTMF4nWaQby4eLyhHW6YePyql5wwxjJzJUVNYg1AusIVjUykCc9wJpWM9t9c+wzP3GriwS4soJeO2rD1ItRPw==}
+  '@vbotma/transformers@3.0.0':
+    resolution: {integrity: sha512-buNHwdF+FvoBlRDYqJQcrF9b/hoSily5C6vUXy14zaEMiRkqIRyGiK711JrXtnqL6W0/BBHhIizFXTe7EfdYnw==}
 
-  '@vbotma/types@1.0.4':
-    resolution: {integrity: sha512-JMRT+AzAQaHMIgB5wGzqh+N7Zr2Vp66Wsy/eo+ZJgyFNmTOZqowd12iloRLeTWEPoIK/UO0heD1KBncOAui+Vg==}
+  '@vbotma/types@3.0.0':
+    resolution: {integrity: sha512-uylzOzCLc0hf/XEggPIWSaHi71O2eRnPnV98x5iwczUl7C1v227VXJ/tt/0xqr3zi6Bsf0kHclPempjBGUN8Fg==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -1892,12 +1892,12 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vbotma/bridge@2.2.9(typescript@5.9.2)':
+  '@vbotma/bridge@4.0.0(typescript@5.9.2)':
     dependencies:
-      '@vbotma/signals': 1.0.2
-      '@vbotma/toolkit': 1.0.5
-      '@vbotma/transformers': 1.1.4(typescript@5.9.2)
-      '@vbotma/types': 1.0.4
+      '@vbotma/signals': 2.0.0
+      '@vbotma/toolkit': 2.0.0
+      '@vbotma/transformers': 3.0.0(typescript@5.9.2)
+      '@vbotma/types': 3.0.0
       better-promises: 1.0.0
       error-kid: 1.0.2
       fp-ts: 2.16.11
@@ -1906,13 +1906,13 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@vbotma/sdk@3.3.2(typescript@5.9.2)':
+  '@vbotma/sdk@5.0.1(typescript@5.9.2)':
     dependencies:
-      '@vbotma/bridge': 2.2.9(typescript@5.9.2)
-      '@vbotma/signals': 1.0.2
-      '@vbotma/toolkit': 1.0.5
-      '@vbotma/transformers': 1.1.4(typescript@5.9.2)
-      '@vbotma/types': 1.0.4
+      '@vbotma/bridge': 4.0.0(typescript@5.9.2)
+      '@vbotma/signals': 2.0.0
+      '@vbotma/toolkit': 2.0.0
+      '@vbotma/transformers': 3.0.0(typescript@5.9.2)
+      '@vbotma/types': 3.0.0
       better-promises: 1.0.0
       error-kid: 1.0.2
       fp-ts: 2.16.11
@@ -1920,23 +1920,23 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@vbotma/signals@1.0.2': {}
+  '@vbotma/signals@2.0.0': {}
 
-  '@vbotma/toolkit@1.0.5':
+  '@vbotma/toolkit@2.0.0':
     dependencies:
       better-promises: 1.0.0
       fp-ts: 2.16.11
 
-  '@vbotma/transformers@1.1.4(typescript@5.9.2)':
+  '@vbotma/transformers@3.0.0(typescript@5.9.2)':
     dependencies:
-      '@vbotma/toolkit': 1.0.5
-      '@vbotma/types': 1.0.4
+      '@vbotma/toolkit': 2.0.0
+      '@vbotma/types': 3.0.0
       fp-ts: 2.16.11
       valibot: 1.2.0(typescript@5.9.2)
     transitivePeerDependencies:
       - typescript
 
-  '@vbotma/types@1.0.4': {}
+  '@vbotma/types@3.0.0': {}
 
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:

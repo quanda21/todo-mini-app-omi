@@ -1,155 +1,153 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/omi.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OMI Elements</title>
+    <link rel="stylesheet" href="./src/scss/tailwind.scss" />
+    <meta name="theme-color" content="#f8fafc" />
+    <style>
+      :root {
+        /* Đặt tên biến rõ ràng, ví dụ --my-app-primary-color */
+        --my-app-primary-color: #02a9a1;
+        /* Màu tím */
+        --my-app-text-color: #ffffff;
+      }
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const myApp = document.querySelector('my-app')
+        const countDisplay = document.getElementById('countDisplay')
+        const hostCountBtn = document.getElementById('hostCountBtn')
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/omi.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OMI Elements</title>
-  <link rel="stylesheet" href="./src/scss/tailwind.scss" />
-  <meta name="theme-color" content="#f8fafc" />
-  <style>
-    :root {
-      /* Đặt tên biến rõ ràng, ví dụ --my-app-primary-color */
-      --my-app-primary-color: #02a9a1;
-      /* Màu tím */
-      --my-app-text-color: #ffffff;
-    }
-  </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.getElementById('theme-toggle-btn')
+        let currentHostTheme = 'normal'
 
-      const myApp = document.querySelector('my-app');
-      const countDisplay = document.getElementById('countDisplay')
-      const hostCountBtn = document.getElementById('hostCountBtn')
+        toggleButton.addEventListener('click', () => {
+          // Chuyển đổi theme
+          currentHostTheme = currentHostTheme === 'normal' ? 'dark' : 'normal'
 
-      const toggleButton = document.getElementById('theme-toggle-btn')
-      let currentHostTheme = 'normal'
+          // 1. Tạo một Custom Event với tên 'theme-change'
+          // Dữ liệu mới (dark/light) được đính kèm trong 'detail'
+          const themeChangeEvent = new CustomEvent('theme-change', {
+            detail: { theme: currentHostTheme },
+          })
 
-      toggleButton.addEventListener('click', () => {
-        // Chuyển đổi theme
-        currentHostTheme = currentHostTheme === 'normal' ? 'dark' : 'normal'
-
-        // 1. Tạo một Custom Event với tên 'theme-change'
-        // Dữ liệu mới (dark/light) được đính kèm trong 'detail'
-        const themeChangeEvent = new CustomEvent('theme-change', {
-          detail: { theme: currentHostTheme },
+          // 2. Phát sự kiện này ra đối tượng window
+          window.dispatchEvent(themeChangeEvent)
+          // toogleDark();
+          console.log(`Ứng dụng chủ đã PHÁT sự kiện đổi theme thành: ${currentHostTheme}`)
         })
 
-        // 2. Phát sự kiện này ra đối tượng window
-        window.dispatchEvent(themeChangeEvent)
-        // toogleDark();
-        console.log(`Ứng dụng chủ đã PHÁT sự kiện đổi theme thành: ${currentHostTheme}`)
-      })
+        if (myApp && countDisplay && hostCountBtn) {
+          // Lắng nghe sự kiện count-event để cập nhật hiển thị
+          myApp.addEventListener('count-event', (e) => {
+            countDisplay.textContent = 'Count value: ' + e.detail.message
+          })
 
-      if (myApp && countDisplay && hostCountBtn) {
-        // Lắng nghe sự kiện count-event để cập nhật hiển thị
-        myApp.addEventListener('count-event', (e) => {
-          countDisplay.textContent = 'Count value: ' + e.detail.message
-        })
-
-        // Khi bấm nút ngoài host thì gọi phương thức countUp trong my-app
-        hostCountBtn.addEventListener('click', () => {
-          myApp.countUp()
-        })
-      }
-
-      try {
-        if (
-          localStorage.theme === "dark" ||
-          (!("theme" in localStorage) &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ) {
-          walkDOMAndToggleDark(document.body, false)
-          document.documentElement.classList.add("dark");
-          document
-            .querySelector('meta[name="theme-color"]')
-            .setAttribute("content", "#0B1120");
-        } else {
-          walkDOMAndToggleDark(document.body, true)
-          document.documentElement.classList.remove("dark");
-        }
-      } catch (_) { }
-    })
-
-    function toggleNodeDark(node, isDark) {
-      if (node instanceof HTMLElement && node.tagName.toLowerCase().indexOf('-') !== -1) {
-        if (isDark) {
-          node.classList.remove('dark')
-        } else {
-          node.classList.add('dark')
-        }
-      }
-    }
-
-    function walkDOMAndToggleDark(rootNode, isDark) {
-      if (isDark) {
-        document.documentElement.classList.remove('dark')
-      } else {
-        document.documentElement.classList.add('dark')
-      }
-      const treeWalker = document.createTreeWalker(rootNode, NodeFilter.SHOW_ELEMENT, null, false)
-
-      while (treeWalker.nextNode()) {
-        const node = treeWalker.currentNode
-        toggleNodeDark(node, isDark)
-
-        // Check if the node has a shadow root
-        if (node.shadowRoot) {
-          walkDOMAndToggleDark(node.shadowRoot, isDark)
-        }
-
-        // Check if the node has assigned nodes (for slots)
-        if (node.assignedNodes) {
-          node.assignedNodes().forEach((assignedNode) => {
-            if (assignedNode.nodeType === Node.ELEMENT_NODE) {
-              walkDOMAndToggleDark(assignedNode, isDark)
-            }
+          // Khi bấm nút ngoài host thì gọi phương thức countUp trong my-app
+          hostCountBtn.addEventListener('click', () => {
+            myApp.countUp()
           })
         }
+
+        try {
+          if (
+            localStorage.theme === 'dark' ||
+            (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          ) {
+            walkDOMAndToggleDark(document.body, false)
+            document.documentElement.classList.add('dark')
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0B1120')
+          } else {
+            walkDOMAndToggleDark(document.body, true)
+            document.documentElement.classList.remove('dark')
+          }
+        } catch (_) {}
+      })
+
+      function toggleNodeDark(node, isDark) {
+        if (node instanceof HTMLElement && node.tagName.toLowerCase().indexOf('-') !== -1) {
+          if (isDark) {
+            node.classList.remove('dark')
+          } else {
+            node.classList.add('dark')
+          }
+        }
       }
-    }
 
-    function toggleDark() {
-      console.log('toggle dark mode host')
-      if (document.documentElement.classList.contains('dark')) {
-        localStorage.theme = 'light'
-        walkDOMAndToggleDark(document.body, true)
-        document.documentElement.classList.remove('dark')
-      } else {
-        localStorage.theme = 'dark'
-        walkDOMAndToggleDark(document.body, false)
-        document.documentElement.classList.add('dark')
+      function walkDOMAndToggleDark(rootNode, isDark) {
+        if (isDark) {
+          document.documentElement.classList.remove('dark')
+        } else {
+          document.documentElement.classList.add('dark')
+        }
+        const treeWalker = document.createTreeWalker(rootNode, NodeFilter.SHOW_ELEMENT, null, false)
+
+        while (treeWalker.nextNode()) {
+          const node = treeWalker.currentNode
+          toggleNodeDark(node, isDark)
+
+          // Check if the node has a shadow root
+          if (node.shadowRoot) {
+            walkDOMAndToggleDark(node.shadowRoot, isDark)
+          }
+
+          // Check if the node has assigned nodes (for slots)
+          if (node.assignedNodes) {
+            node.assignedNodes().forEach((assignedNode) => {
+              if (assignedNode.nodeType === Node.ELEMENT_NODE) {
+                walkDOMAndToggleDark(assignedNode, isDark)
+              }
+            })
+          }
+        }
       }
-    }
 
-    function refreshDark() {
-      if (document.documentElement.classList.contains('dark')) {
-        walkDOMAndToggleDark(document.body, false)
-      } else {
-        walkDOMAndToggleDark(document.body, true)
+      function toggleDark() {
+        console.log('toggle dark mode host')
+        if (document.documentElement.classList.contains('dark')) {
+          localStorage.theme = 'light'
+          walkDOMAndToggleDark(document.body, true)
+          document.documentElement.classList.remove('dark')
+        } else {
+          localStorage.theme = 'dark'
+          walkDOMAndToggleDark(document.body, false)
+          document.documentElement.classList.add('dark')
+        }
       }
-    }
 
-    window.addEventListener('load', function () {
-      refreshDark()
-    })
+      function refreshDark() {
+        if (document.documentElement.classList.contains('dark')) {
+          walkDOMAndToggleDark(document.body, false)
+        } else {
+          walkDOMAndToggleDark(document.body, true)
+        }
+      }
 
+      window.addEventListener('load', function () {
+        refreshDark()
+      })
+    </script>
+  </head>
 
-  </script>
-</head>
-
-<body>
-  <h1>Trang web host</h1>`
-  <button id="theme-toggle-btn">Chuyển Theme</button>
-  <button id="hostCountBtn">+ 1 Ở bên ngoài host</button>
-  <p id="countDisplay">Count value will appear here</p>
-  <my-todo-mini-app theme="normal" api-base-url="https://api-sandbox-h01.vbot.vn/v1.0"
-    access-token="6DRsWkIgoxR5WYafvovJIDxx4RKS3BuQsHzE6k2gul8onpZPiQUlrxqzJd8mjxwHJl8pVOGZCJYXpLaYPYQbbqVQNRHUJp94edO2EP-Yi7WPYr30UEBVcU65ers6jAK5ErEWaf2gQG_5XM7-_FXE3ePXCZjPhXo4NMPQ0xstfAu7ybfVnEMN0HkmKacMkBfIcqa8v4SJ3TRQsSfY8e-9tOKwzL5pGd_dsZHB5QAZH4JmXvSIY6ZSMskJZNT-gFZHgTMGijLKkaapack6D3Iku2qoADPwM8srp4yC0LnGNEUWWR_3YfNN3DcCZYiOi-Z4lNF8MoWkIAocCbDzT9qIzJgnDxOfSGiuoc0lf5QWueWnQkFpjsrraiZiuuHM0oOo_dolxft5KnmmyTpk6Yy1dTqbsunwfnuY5KUEUSKRw5Ex383VriuwgqRf41DQIjXd44LK-_YAlPIqaFoz7h1UARTvvZUoKF92xex40fu2WXxCzJmUwomR9q6o1xJSbwYYkY8yzkjJBQKX19zBJAYvcQ"
-    token-type="Bearer" project-code="PR202508271049469150" uid="19c0f2c4ab324b619dacca76cf5e254e"
-    vb-web-app-version="9.2" vb-web-app-platform="web" vb-web-app-theme-params="{}"></my-todo-mini-app>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
-
-
+  <body>
+    <h1>Trang web host</h1>
+    <button id="theme-toggle-btn">Chuyển Theme</button>
+    <button id="hostCountBtn">+ 1 Ở bên ngoài host</button>
+    <p id="countDisplay">Count value will appear here</p>
+    <my-todo-mini-app
+      theme="dark"
+      api-base-url="https://api-sandbox-h01.vbot.vn/v1.0"
+      access-token="MdjlsJPnKn8w2QoF3D9ac3Y1ioBhIr837n01usQrmpgLBe4pfEeDGd_TU21AEz5_UQmwvFWFR42M8Ko3UtlOztr2bE_t_5kk7lARuC4FDpVyCgWDc3TgZGr-GGM9vJSh4ka9ZxsxehG1LMMV7cYGwP0sVk8598p07xHFIccDQmVJc8HjlBhv3xBvhtTP4ojHo9WShGCmvRzLF7QycBi569-nDIvmOr2ovjWnuGaKb3bioCReAJRPyNPTKoMQtVHaxWAm79wSYUTre2cnnK1XDdIbKs2QADcS7f9LlXMPMXrRJEXtJO7sOOJMrRCpnEIlP2CYzlC-GNDDQ3FMhdrz2BhSPyR_KRZ5Y2mzVEv7ptUS1ncOxtHiLu87l3VQTmGqHomVPJBu-O1mVw3J9yaT3wyPgjJoketcOqs0MdNiuBwP05sR_ICxBqToM_FeHiiQr6E0nddKychVvYz9AvvHwabvpLA1sDRgHCLal54pXUGJ_tohoOaIZ_fZvEsZMOmGLYwkLgJCsmLzR2AWE0EJmAfDq4ELjBJAOJ8MzG0x8ww"
+      token-type="Bearer"
+      project-code="PR202511111015435173"
+      uid="dc4ff4be979e48a095593dd382cffd23"
+      vb-web-app-version="3.0"
+      vb-web-app-platform="web"
+      vb-web-app-theme-params="{}"
+    ></my-todo-mini-app>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

@@ -132,15 +132,9 @@ export default class extends Component<Props> {
           {!loading.value && (
             <div class="max-h-[calc(100vh-40px)] overflow-y-auto custom-scrollbar">
               {activeTodos.length > 0 ? (
-                <div class="flex flex-col">
+                <div class="flex flex-col gap-3 py-3">
                   {activeTodos.map((todo) => (
-                    <todo-card
-                      key={todo.id}
-                      todo={todo}
-                      onComplete={this.handleComplete}
-                      onClick={this.handleClick}
-                      class="py-3"
-                    />
+                    <todo-card key={todo.id} todo={todo} onComplete={this.handleComplete} onClick={this.handleClick} />
                   ))}
                 </div>
               ) : (

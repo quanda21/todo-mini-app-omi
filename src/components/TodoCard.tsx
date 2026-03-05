@@ -38,10 +38,10 @@ export default class extends Component<Props> {
     const { todo } = props
     return (
       <div
-        class="p-3 rounded-md bg-vb-secondary-bg border border-vb-section-separator transition-all hover:shadow-sm cursor-pointer"
+        class="pt-3 px-4 pb-4 rounded-md bg-vb-secondary-bg border border-vb-section-separator transition-all hover:shadow-sm cursor-pointer"
         onClick={this.handleClick}
       >
-        <div class="flex items-center gap-3 mb-3">
+        <div class="flex items-center gap-3 mb-4">
           <span class="text-vb-accent font-semibold text-sm hover:underline">{todo.code}</span>
           <span class="text-vb-text font-semibold text-sm truncate flex-1">{formatCallTitle(todo.title)}</span>
         </div>
@@ -49,7 +49,7 @@ export default class extends Component<Props> {
         <div class="w-full">
           <button
             type="button"
-            class="w-full h-9 bg-vb-button text-white font-semibold text-sm rounded-md transition-all hover:brightness-90 active:scale-[0.98]"
+            class="w-full h-9 bg-vb-button text-white font-semibold text-sm rounded-md transition-all hover:bg-vb-accent active:scale-[0.98]"
             onClick={this.handleComplete}
           >
             Đánh dấu hoàn thành

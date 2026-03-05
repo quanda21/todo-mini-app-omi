@@ -20,7 +20,7 @@ html,
   --vb-secondary-bg: #fff;
   --vb-text: #000000;
   --vb-button: #01684b;
-  --vb-accent: #01684b;
+  --vb-accent: #1f8061;
   --vb-section-separator: #e5e7eb;
 }
 
@@ -35,7 +35,7 @@ html.dark,
   --vb-secondary-bg: #141414;
   --vb-text: #ffffff;
    --vb-button: #16c090;
-  --vb-accent: #16c090;
+  --vb-accent: #1f8061;
   --vb-section-separator: #414243;
 }
 

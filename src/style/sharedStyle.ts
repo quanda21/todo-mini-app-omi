@@ -17,7 +17,7 @@ html,
   --member-bg: #e6f0fa;
   --customer-bg: #f5f7fa;
   --vb-bg: #ffffff;
-  --vb-secondary-bg: #f8fbff;
+  --vb-secondary-bg: #fff;
   --vb-text: #000000;
   --vb-button: #01684b;
   --vb-accent: #01684b;
@@ -27,15 +27,15 @@ html,
 :root.dark,
 html.dark,
 :host(.dark) {
-  --primary: #01684b;
+  --primary: #16c090;
   --ai-tag-bg: #141414;
   --member-bg: #153b75;
   --customer-bg: #2a3846;
   --vb-bg: #141414;
   --vb-secondary-bg: #141414;
   --vb-text: #ffffff;
-   --vb-button: #01684b;
-  --vb-accent: #01684b;
+   --vb-button: #16c090;
+  --vb-accent: #16c090;
   --vb-section-separator: #414243;
 }
 

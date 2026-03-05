@@ -4,6 +4,7 @@ import { getAllNoPageTodoAPI, getProjectCode, markTodoAsComplete, isAuthedSignal
 import { sharedStyle } from '../style/sharedStyle'
 import { useTheme } from '../utils/themeSignal'
 import type { TodoItem } from '../api/mockData'
+import { invokeCustomMethod, notification } from '@vbotma/sdk'
 import './TodoCard'
 
 interface Props {
@@ -76,20 +77,17 @@ export default class extends Component<Props> {
     const todo = e.detail as TodoItem
     try {
       await markTodoAsComplete(todo.id)
+      console.log('complete', todo.id)
 
       // Update local state
       const updatedTodos = todos.value.map((t) => (t.id === todo.id ? { ...t, status: 'DONE' } : t))
       todos.value = updatedTodos
 
       // SDK Popup notification
-      import('@vbotma/sdk')
-        .then(({ popup }) => {
-          popup.show({
-            message: `Đã hoàn thành: ${todo.title}`,
-            buttons: [{ id: 'ok', type: 'ok' }],
-          })
+      if (notification.isSupported())
+        notification.send({
+          message: `Đã hoàn thành: ${todo.title}`,
         })
-        .catch(() => {})
     } catch (err: any) {
       console.error('Lỗi khi đánh dấu hoàn thành:', err)
       errorMessage.value = err.message || 'Không thể đánh dấu hoàn thành công việc'
@@ -97,9 +95,11 @@ export default class extends Component<Props> {
   }
 
   @bind
-  handleClick(e: CustomEvent) {
+  async handleClick(e: CustomEvent) {
     const todo = e.detail as TodoItem
     console.log('Click vào công việc:', todo.code)
+    // Truyền đúng params structure
+    await invokeCustomMethod('view_detail_todo', { id: todo.id })()
   }
 
   render() {
@@ -123,11 +123,11 @@ export default class extends Component<Props> {
             </div>
           )}
 
-          {errorMessage.value && (
+          {/* {errorMessage.value && (
             <div class="m-4 p-3 bg-red-900/30 border border-red-500 text-red-200 rounded-lg text-sm">
               {errorMessage.value}
             </div>
-          )}
+          )} */}
 
           {!loading.value && (
             <div class="max-h-[calc(100vh-40px)] overflow-y-auto custom-scrollbar">

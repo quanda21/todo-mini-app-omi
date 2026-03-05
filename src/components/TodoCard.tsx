@@ -29,7 +29,8 @@ export default class extends Component<Props> {
   }
 
   @bind
-  handleClick() {
+  handleClick(e: Event) {
+    e.stopPropagation()
     this.fire('click', this.props.todo)
   }
 
@@ -37,7 +38,7 @@ export default class extends Component<Props> {
     const { todo } = props
     return (
       <div
-        class="p-3 rounded-md bg-vb-secondary-bg border border-vb-section-separator transition-all hover:-translate-y-0.5 hover:shadow-sm cursor-pointer"
+        class="p-3 rounded-md bg-vb-secondary-bg border border-vb-section-separator transition-all hover:shadow-sm cursor-pointer"
         onClick={this.handleClick}
       >
         <div class="flex items-center gap-3 mb-3">
